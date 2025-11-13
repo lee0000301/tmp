@@ -14,10 +14,16 @@ import {
   MapPin,
   Calendar,
   User,
-  MessageSquare
+  MessageSquare,
+  PenSquare,
+  X
 } from 'lucide-react';
 import { Course, User as UserType, Review, Badge as BadgeType, CourseRanking, GlobalRanking } from '../types';
 import { HallOfFame } from './HallOfFame';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Textarea } from './ui/textarea';
+import { Label } from './ui/label';
 
 interface CommunityProps {
   courses: Course[];
@@ -63,6 +69,12 @@ export function Community({
       liked: false
     }))
   );
+  const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
+  const [newReview, setNewReview] = useState({
+    courseId: 0,
+    rating: 5,
+    content: ''
+  });
 
   const handleLike = (reviewId: number) => {
     setCommunityReviews(prev => 
@@ -96,6 +108,34 @@ export function Community({
           : review
       )
     );
+  };
+
+  const handleSubmitReview = () => {
+    if (!currentUser || !newReview.courseId || !newReview.content.trim()) {
+      return;
+    }
+
+    const review: CommunityReview = {
+      id: Date.now(),
+      userId: currentUser.id,
+      userName: currentUser.nickname,
+      courseId: newReview.courseId,
+      rating: newReview.rating,
+      content: newReview.content.trim(),
+      date: new Date().toISOString(),
+      likes: 0,
+      comments: [],
+      liked: false,
+      photos: []
+    };
+
+    setCommunityReviews(prev => [review, ...prev]);
+    setIsWriteModalOpen(false);
+    setNewReview({
+      courseId: 0,
+      rating: 5,
+      content: ''
+    });
   };
 
   const formatDate = (dateString: string) => {
@@ -135,6 +175,107 @@ export function Community({
 
           {/* 리뷰 & 후기 탭 */}
           <TabsContent value="reviews" className="space-y-6">
+            {/* 글쓰기 버튼 */}
+            <div className="flex justify-end">
+              {currentUser ? (
+                <Dialog open={isWriteModalOpen} onOpenChange={setIsWriteModalOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="flex items-center gap-2">
+                      <PenSquare className="w-4 h-4" />
+                      리뷰 작성하기
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle>리뷰 작성하기</DialogTitle>
+                      <DialogDescription>
+                        갈맷길 코스를 선택하고 경험을 공유해주세요.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      {/* 코스 선택 */}
+                      <div className="space-y-2">
+                        <Label htmlFor="course">코스 선택</Label>
+                        <Select 
+                          value={newReview.courseId.toString()} 
+                          onValueChange={(value) => setNewReview(prev => ({ ...prev, courseId: parseInt(value) }))}
+                        >
+                          <SelectTrigger id="course">
+                            <SelectValue placeholder="코스를 선택하세요" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {courses.map((course) => (
+                              <SelectItem key={course.id} value={course.id.toString()}>
+                                {course.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {/* 별점 */}
+                      <div className="space-y-2">
+                        <Label>별점</Label>
+                        <div className="flex items-center gap-2">
+                          {[1, 2, 3, 4, 5].map((rating) => (
+                            <Star
+                              key={rating}
+                              className={`w-8 h-8 cursor-pointer transition-colors ${
+                                rating <= newReview.rating
+                                  ? 'text-yellow-400 fill-current'
+                                  : 'text-gray-300'
+                              }`}
+                              onClick={() => setNewReview(prev => ({ ...prev, rating }))}
+                            />
+                          ))}
+                          <span className="ml-2 text-sm text-gray-600">
+                            {newReview.rating}점
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* 내용 */}
+                      <div className="space-y-2">
+                        <Label htmlFor="content">리뷰 내용</Label>
+                        <Textarea
+                          id="content"
+                          placeholder="갈맷길을 걸으며 느낀 점, 추천하고 싶은 점 등을 자유롭게 작성해주세요."
+                          value={newReview.content}
+                          onChange={(e) => setNewReview(prev => ({ ...prev, content: e.target.value }))}
+                          rows={8}
+                          className="resize-none"
+                        />
+                        <p className="text-xs text-gray-500">
+                          {newReview.content.length} / 1000자
+                        </p>
+                      </div>
+
+                      {/* 버튼 */}
+                      <div className="flex justify-end gap-2 pt-4">
+                        <Button 
+                          variant="outline" 
+                          onClick={() => setIsWriteModalOpen(false)}
+                        >
+                          취소
+                        </Button>
+                        <Button 
+                          onClick={handleSubmitReview}
+                          disabled={!newReview.courseId || !newReview.content.trim()}
+                        >
+                          작성 완료
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              ) : (
+                <Button disabled className="flex items-center gap-2">
+                  <PenSquare className="w-4 h-4" />
+                  로그인 후 이용 가능
+                </Button>
+              )}
+            </div>
+
             <div className="grid gap-6">
               {communityReviews.length === 0 ? (
                 <Card>

@@ -24,12 +24,14 @@ export interface Course {
     end: string;
     checkpoints: string[];
   };
+
   facilities: {
     restroom: boolean;
     drinkingWater: boolean;
     viewpoint: boolean;
     parking: boolean;
   };
+
   transportation: string;
   highlights: string[];
   coordinates: {
@@ -37,6 +39,8 @@ export interface Course {
     lng: number;
   };
   completedCount: number;
+  lat: number;
+  lng: number;
 }
 
 export interface User {

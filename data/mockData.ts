@@ -10,6 +10,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "기장군",
     image: "https://images.unsplash.com/photo-1703768516086-45eb97f36ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBiZWFjaCUyMGNvYXN0bGluZXxlbnwxfHx8fDE3NTkwMjE4ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.2447,
+    lng: 129.2224,
     sections: [
       {
         id: "1-1",
@@ -57,6 +59,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "해운대구/수영구",
     image: "https://images.unsplash.com/photo-1647767444107-8f383924382d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWV1bmRhZSUyMGJlYWNoJTIwYnVzYW58ZW58MXx8fHwxNzU5MDIxOTYxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.1595,
+    lng: 129.1603,
     sections: [
       {
         id: "2-1",
@@ -104,6 +108,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "남구/중구/영도구",
     image: "https://images.unsplash.com/photo-1591366152219-48d643eb3aac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNhbiUyMHRvd2VyJTIwY2l0eSUyMHZpZXd8ZW58MXx8fHwxNzU5MDIxOTYxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.0512,
+    lng: 129.0867,
     sections: [
       {
         id: "3-1",
@@ -161,6 +167,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "영도구/서구/사하구/강서구",
     image: "https://images.unsplash.com/photo-1754195451576-9c034bbf4ab2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb25nZG8lMjBiZWFjaCUyMGJ1c2FufGVufDF8fHx8MTc1OTAyMTk2Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.0977,
+    lng: 129.0104,
     sections: [
       {
         id: "4-1",
@@ -218,6 +226,8 @@ export const mockCourses: Course[] = [
     difficulty: "상",
     region: "강서구",
     image: "https://images.unsplash.com/photo-1730825963012-579d146bd11a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYWRlb2tkbyUyMGlzbGFuZCUyMGtvcmVhfGVufDF8fHx8MTc1OTAyMTk2Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.0154,
+    lng: 128.9021,
     sections: [
       {
         id: "5-1",
@@ -275,6 +285,8 @@ export const mockCourses: Course[] = [
     difficulty: "상",
     region: "강서구/북구/금정구",
     image: "https://images.unsplash.com/photo-1617286243498-dff5d6fac156?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjByaXZlciUyMHBhcmt8ZW58MXx8fHwxNzU5MDIxOTY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.2364,
+    lng: 129.0319,
     sections: [
       {
         id: "6-1",
@@ -342,6 +354,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "동래구/금정구",
     image: "https://images.unsplash.com/photo-1662527984434-8a3d93dfac33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBtb3VudGFpbiUyMHRlbXBsZXxlbnwxfHx8fDE3NTkwMjE5NjV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.2364,
+    lng: 129.0319,
     sections: [
       {
         id: "7-1",
@@ -389,6 +403,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "금정구/동래구/연제구/수영구",
     image: "https://images.unsplash.com/photo-1617286243498-dff5d6fac156?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjByaXZlciUyMHBhcmt8ZW58MXx8fHwxNzU5MDIxOTY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.2047,
+    lng: 129.0842,
     sections: [
       {
         id: "8-1",
@@ -436,6 +452,8 @@ export const mockCourses: Course[] = [
     difficulty: "중",
     region: "금정구/기장군",
     image: "https://images.unsplash.com/photo-1663030993965-f5f16d2ddf45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBtb3VudGFpbiUyMGhpa2luZ3xlbnwxfHx8fDE3NTg5NDM1MDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    lat: 35.2447,
+    lng: 129.2224,
     sections: [
       {
         id: "9-1",

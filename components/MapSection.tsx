@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -41,6 +41,9 @@ export function MapSection({
     parking: true
   });
 
+  // 네이버 지도 관련 Hooks 추가
+  const mapElement = useRef<HTMLDivElement>(null);
+
   const handleCourseSelect = (course: Course) => {
     setSelectedCourse(course);
   };
@@ -75,6 +78,28 @@ export function MapSection({
     };
     return courseColors[courseId] || 'bg-gray-500';
   };
+
+  // --- 네이버 지도 초기화 로직 ---
+  useEffect(() => {
+    if (!mapElement.current || !window.naver || !window.naver.maps) {
+      console.warn("Naver Map script not loaded yet.");
+      return; 
+    }
+
+    const center = new window.naver.maps.LatLng(35.1796, 129.0756); // 부산 중심
+    const mapOptions: naver.maps.MapOptions = {
+      center: center,
+      zoom: 11,
+      minZoom: 9,
+      // [참고] 기존 CSS 컨트롤과 겹치므로 API 컨트롤은 끕니다.
+      zoomControl: false,
+      mapDataControl: false,
+      scaleControl: false,
+    };
+
+    new window.naver.maps.Map(mapElement.current, mapOptions);
+
+  }, []); // 최초 1회만 실행
 
   return (
     <section className="py-24 bg-gray-50">
@@ -220,10 +245,9 @@ export function MapSection({
               <CardContent className="p-0 h-full">
                 <div className="h-full rounded-lg relative overflow-hidden">
                   {/* 갈맷길 전체지도 */}
-                  <ImageWithFallback
-                    src={galmaetgilMapImage}
-                    alt="부산 갈맷길 전체지도"
-                    className="w-full h-full object-cover"
+                  <div 
+                  ref={mapElement}
+                  className="w-full h-full absolute top-0 left-0" // 3. 다른 UI에 겹치도록 absolute 추가 
                   />
 
                   {/* 클릭 가능한 투명 영역들 - 갈맷길 코스별 위치 */}
